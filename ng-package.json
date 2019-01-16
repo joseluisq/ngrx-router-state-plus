@@ -1,0 +1,20 @@
+{
+  "$schema": "./node_modules/ng-packagr/ng-package.schema.json",
+  "whitelistedNonPeerDependencies": [
+    "angular",
+    "rxjs",
+    "ngrx"
+  ],
+  "lib": {
+    "entryFile": "src/index.ts",
+    "umdModuleIds": {
+      "@ngrx/store": "ngrx.store",
+      "@ngrx/router-store": "ngrx.router-store",
+      "@ngrx/effects": "ngrx.effects",
+      "@angular/core": "ng.core",
+      "@angular/router": "ng.router",
+      "rxjs": "Rx",
+      "rxjs/operators": "Rx.operato"
+    }
+  }
+}
