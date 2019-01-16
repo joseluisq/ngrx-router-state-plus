@@ -18,6 +18,8 @@ npm install ngrx-router-state-plus --save
 
 ## Usage
 
+Sample route path: `/page/:subpage`
+
 __page.effects.ts__
 
 ```ts
@@ -28,9 +30,10 @@ import { ofRouterSegment } from 'ngrx-router-state-plus'
 
 import { PageNew, PageEdit } from '@actions/page.actions'
 
+const KEY = 'page-key-url-segment'
+
 @Injectable()
 export class PageEffects {
-  const KEY = 'page-key-url-segment'
 
   @Effect()
   public pageNew$ = this.actions$.pipe(
