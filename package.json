@@ -1,6 +1,6 @@
 {
   "name": "ngrx-router-state-plus",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "@ngrx/router-store extension that provides router state serialization with a common payload-composed state data",
   "repository": {
     "type": "git",
