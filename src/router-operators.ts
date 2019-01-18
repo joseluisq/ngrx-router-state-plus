@@ -8,10 +8,10 @@ import { ofType } from '@ngrx/effects'
  * RxJS filter by Router Segment of the payload segments map
  *
  * @param key Segment key
- * @param value Segment value expected
+ * @param value Segment value or Segment array expected
  * @returns Observable<RouterNavigationAction<CustomSegmentType>>
  */
-export function ofRouterSegment <T> (key: string, value: string) {
+export function ofRouterSegment <T> (key: string, value: string | string[]) {
   return (source: Observable<RouterNavigationActionPlus<T>>) => {
     return source.pipe(
       ofType<RouterNavigationActionPlus<T>>(ROUTER_NAVIGATION),
@@ -21,7 +21,13 @@ export function ofRouterSegment <T> (key: string, value: string) {
         if (isRouteAction) {
           const { segments } = routeAction.payload.routerState
 
-          return segments && segments[key] === value
+          if (segments) {
+            if (Array.isArray(value)) {
+              return value.includes(segments[key])
+            } else {
+              return segments[key] === value
+            }
+          }
         }
 
         return isRouteAction

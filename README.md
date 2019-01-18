@@ -81,6 +81,16 @@ __Note:__ For example, if you define two keys or more and your URL has only one 
 
 Represents a common interface for navigation payload state data. See [router state payload interface](./src/router-state.ts).
 
+## Operators
+
+### ofRouterSegment
+
+A [RxJS operator](https://rxjs-dev.firebaseapp.com/api) that filters by `Router Segment` of the payload segments object.
+
+```ts
+function ofRouterSegment <SegmentType> (key: string, value: string | string[])
+```
+
 ## Contributions
 
 [Pull requests](https://github.com/joseluisq/slendr/pulls) or [issues](https://github.com/joseluisq/slendr/issues) are very appreciated.
