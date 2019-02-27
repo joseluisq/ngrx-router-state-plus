@@ -3,14 +3,14 @@ import { ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router'
 import { RouterStateSerializer } from '@ngrx/router-store'
 
 import { RouterStorePlusConfig, STORE_ROUTE_PLUS_CONFIG } from './config'
-import { RouterStatePlus, RouterStateSegments } from './router-state'
+import { RouterStatePlusActivatedSnapshot, RouterStateTokenSegments } from './router-state'
 
 /**
- * Router serializer that takes a `RouterStateSnapshot` and return a composed state object (RouterStatePlus)
+ * Router erializer that takes a `RouterStateSnapshot` and return an `RouterStatePlusActivatedSnapshot` object
  */
 @Injectable()
-export class RouterStateSerializerPlus<RouterSegmentType> implements
-  RouterStateSerializer<RouterStatePlus<RouterSegmentType>> {
+export class RouterStateSerializerPlus<RouterTokenSegments> implements
+  RouterStateSerializer<RouterStatePlusActivatedSnapshot<RouterTokenSegments>> {
 
   private readonly config: RouterStorePlusConfig
 
@@ -19,42 +19,56 @@ export class RouterStateSerializerPlus<RouterSegmentType> implements
   }
 
   public serialize (routerState: RouterStateSnapshot) {
-    return this.serializeWithSegments(routerState, this.config.segmentKeys)
+    return this.serializeWithSegments(routerState, this.config.urlTokenSegmentKeys)
   }
 
   /**
    * Serialize a `RouterStateSnapshot` into composed object
    *
-   * @param routerState
-   * @param segmentKeys
-   * @returns RouterStateUrl with segments
+   * @param routerState Router state
+   * @param segmentKeys Router segment keys
    */
   public serializeWithSegments (
     routerState: RouterStateSnapshot,
     segmentKeys: string[]
-  ): RouterStatePlus<RouterSegmentType> {
+  ): RouterStatePlusActivatedSnapshot<RouterTokenSegments> {
     let route = routerState.root
 
     if (route.firstChild) {
       route = route.firstChild
     }
 
-    const { url, root: { queryParams } } = routerState
-    const { params } = route
-    const segments = this.createSegmentsURI<RouterSegmentType>(route, segmentKeys)
+    const urlTokenSegments = this.createUrlTokenSegments<RouterTokenSegments>(route, segmentKeys)
 
-    return { url, params, queryParams, segments }
+    return {
+      url: routerState.url,
+      urlSegments: route.url,
+      urlTokenSegments,
+      params: route.params,
+      queryParams: route.queryParams,
+      fragment: route.fragment,
+      data: route.data,
+      outlet: route.outlet,
+      component: route.component,
+      routeConfig: route.routeConfig,
+      root: route.root,
+      parent: route.parent,
+      firstChild: route.firstChild,
+      children: route.children,
+      pathFromRoot: route.pathFromRoot,
+      paramMap: route.paramMap,
+      queryParamMap: route.queryParamMap
+    }
   }
 
   /**
-   * Create a composed segment object
+   * Create a composed mapping object by token segment urls
    *
-   * @param route
-   * @param keys
-   * @returns Return a segments object
+   * @param route Route activated snapshot
+   * @param keys Token segment keys
    */
-  private createSegmentsURI<T = {}> (route: ActivatedRouteSnapshot, keys: string[]): RouterStateSegments<T> {
-    const segments = {} as RouterStateSegments<T>
+  private createUrlTokenSegments<T = {}> (route: ActivatedRouteSnapshot, keys: string[]): RouterStateTokenSegments<T> {
+    const segments = {} as RouterStateTokenSegments<T>
 
     keys.forEach((key, index) => {
       const segment = route.url[index] || null
