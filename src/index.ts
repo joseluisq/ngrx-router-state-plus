@@ -3,11 +3,12 @@ export {
 } from './router-store.module'
 
 export {
-  RouterStatePlus
+  RouterStatePlusActivatedSnapshot
 } from './router-state'
 
 export {
-  ofRouterSegment
+  ofRouterNav,
+  ofRouterTokenSegmentsNav
 } from './router-operators'
 
 export {
@@ -17,3 +18,7 @@ export {
 export {
   RouterNavigationActionPlus
 } from './navigation.actions'
+
+export {
+  selectRouterState
+} from './navigation.selectors'

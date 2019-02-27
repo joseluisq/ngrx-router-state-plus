@@ -4,8 +4,8 @@ import { InjectionToken } from '@angular/core'
  * RouterStorePlus configuration
  */
 export class RouterStorePlusConfig {
-  /** A list of custom segment keys to map the "RouterStatePlus" payload segments */
-  public segmentKeys: string[]
+  /** Custom token segment keys to map the "RouterStatePlusActivatedSnapshot" payload segments */
+  public urlTokenSegmentKeys: string[]
 }
 
 export const STORE_ROUTE_PLUS_CONFIG = new InjectionToken<RouterStorePlusConfig>(
@@ -24,7 +24,7 @@ export function createConfig (
   _options: RouterStorePlusOptions
 ): RouterStorePlusConfig {
   const DEFAULT_OPTIONS: RouterStorePlusConfig = {
-    segmentKeys: []
+    urlTokenSegmentKeys: []
   }
 
   const options = typeof _options === 'function' ? _options() : _options

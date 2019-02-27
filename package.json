@@ -11,7 +11,8 @@
     "NgRx",
     "Store",
     "Router",
-    "Redux"
+    "Redux",
+    "serialization"
   ],
   "author": "Jose Quintana <git.io/joseluisq>",
   "license": "MIT",
