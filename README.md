@@ -28,7 +28,7 @@ npm install ngrx-router-state-plus --save
 
 ## Usage
 
-Here a small example its illustrates usage better.
+Here a small example illustrating its usage.
 Sample route path used: `/page/:my_token_segment`
 
 __app.module.ts__
@@ -102,7 +102,7 @@ export class PageEffects {
 
 __page.component.ts__
 
-Normally you will only need to subscribe to your individual states, but if you need access to Router state you can try it out as follow:
+Normally you will only need to subscribe to your individual states dispatched from your effects, but if you need access to Router state data directly you can do it out as follow:
 
 ```ts
 import { Component, OnInit } from '@angular/core'
@@ -119,7 +119,7 @@ interface MyTokenSegments {
   template: `...`
 })
 export class PageComponent {
-  // Some others subscriptions here...
+  // Some custom subscriptions here...
 
   // 1. Router State subscription
   private route$ = this.store.pipe(select(
@@ -129,10 +129,11 @@ export class PageComponent {
 
   constructor (private store: Store<MyRootState>) { }
 
-  // 2. Displaying some values
+  // 2. Displaying current Router State values
   ngOnInit () {
     this.route$
-      // `urlTokenSegments` gives you back all segments previously defined
+      // For example, `urlTokenSegments` gives you back all segments previously defined
+      // Since `state` based on `ActivatedRouteSnapshot`, you can also access to their properties as usual
       .subscribe((state) => console.log(state.urlTokenSegments))
       .unsubscribe()
   }
