@@ -1,22 +1,21 @@
 import { ROUTER_NAVIGATION } from '@ngrx/router-store'
-import { Observable } from 'rxjs'
+import { Observable, OperatorFunction } from 'rxjs'
 import { filter } from 'rxjs/operators'
-import { RouterNavigationActionPlus } from './navigation.actions'
 import { ofType } from '@ngrx/effects'
+
+import { RouterNavigationActionPlus } from './navigation.actions'
 
 /**
  * RxJS filter by router navigation (ROUTER_NAVIGATION)
  *
  * @returns Observable<RouterNavigationAction<RouterTokenSegments>>
  */
-export function ofRouterNav <RouterTokenSegments = {}> () {
-  return (source: Observable<RouterNavigationActionPlus<RouterTokenSegments>>) => {
-    return source.pipe(
-      ofType<RouterNavigationActionPlus<RouterTokenSegments>>(ROUTER_NAVIGATION),
+export const ofRouterNav = <T extends RouterNavigationActionPlus = RouterNavigationActionPlus>() =>
+  (source: Observable<T>) =>
+    source.pipe(
+      ofType(ROUTER_NAVIGATION),
       filter((routeAction) => routeAction.type === ROUTER_NAVIGATION)
     )
-  }
-}
 
 /**
  * RxJS filter by router token segment of the payload segments map (ROUTER_NAVIGATION)

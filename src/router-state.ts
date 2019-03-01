@@ -1,5 +1,6 @@
 import { Type } from '@angular/core'
 import { ActivatedRouteSnapshot, Data, ParamMap, Params, Route, UrlSegment } from '@angular/router'
+import { RouterNavigationPayload } from '@ngrx/router-store'
 
 /** RouterStateSegments intersection type (token segments mapping object) */
 export type RouterStateTokenSegments<T> = T & { [key: string]: string }
@@ -44,4 +45,8 @@ export interface RouterStatePlusActivatedSnapshot<RouterTokenSegments> {
   readonly paramMap: ParamMap
   readonly queryParamMap: ParamMap
   toString (): string
+}
+
+export interface RouterNavPayload<RouterTokenSegments = {}>
+  extends RouterNavigationPayload<RouterStatePlusActivatedSnapshot<RouterTokenSegments>> {
 }

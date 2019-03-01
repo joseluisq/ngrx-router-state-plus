@@ -18,12 +18,11 @@ type RootState<IRootState, ISegments> = IRootState & RouterState<ISegments>
 export const selectRouterState = <IRootState, ISegments = {}>(
   featureName = DEFAULT_ROUTER_FEATURENAME
 ) => (routerState: RootState<IRootState, ISegments>) => {
-  const feature = routerState[featureName]
-
   // According to `RouterReducerState` type
   // https://github.com/ngrx/platform/blob/master/modules/router-store/src/reducer.ts
-  if (feature && feature['state']) {
-    return feature['state']
+  if (routerState.hasOwnProperty(featureName)) {
+    const feature = routerState[featureName]
+    return feature ? feature['state'] : feature
   } else {
     throw new Error(`Router state feature '${featureName}' not found.`)
   }
