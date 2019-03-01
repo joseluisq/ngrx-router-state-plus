@@ -6,11 +6,11 @@
 
 - [Router state serialization](https://ngrx.io/guide/router-store/configuration#custom-router-state-serializer) out of the box.
 - Route state payload that extend all [ActivatedRouteSnapshot](https://angular.io/api/router/ActivatedRouteSnapshot#description) properties.
-- Selectors:
-  - `selectRouterState()` selector to get current router state.
 - RxJS operators for using with effects:
   - `ofRouterNav()` operator to filter by router navigation ([NgRx ROUTER_NAVIGATION](https://ngrx.io/guide/router-store/actions)).
   - `ofRouterTokenSegmentsNav()` operator to filter by router token segment (E.g `page/:token_segment`).
+- Selectors:
+  - `selectRouterNav()` selector to get current router state navigation.
 
 ## Install
 
@@ -38,10 +38,12 @@ import { NgModule } from '@angular/core'
 
 @NgModule({
   imports: [
-    // StoreModule, StoreRouterConnectingModule, EffectsModule ...
+    // StoreModule,
+    // EffectsModule,
+    // StoreRouterConnectingModule,
 
     RouterStorePlusModule.forRoot({
-      // Token segment keys to mapping
+      // Optional token segment keys to mapping (needed to using with ofRouterTokenSegmentsNav)
       urlTokenSegmentKeys: [ 'my_token_segment', 'another-key' ]
     })
   ]
@@ -105,7 +107,7 @@ __page.component.ts__
 ```ts
 import { Component, OnInit } from '@angular/core'
 
-import { selectRouterState } from 'ngrx-router-state-plus'
+import { selectRouterNav } from 'ngrx-router-state-plus'
 
 interface MyTokenSegments {
   my_token_segment: string
@@ -127,10 +129,10 @@ export class PageComponent {
 
   constructor (private store: Store<MyRootState>) { }
 
-  // 2. Displaying current Router State values
+  // 2. Displaying current Router state value
   ngOnInit () {
     this.route$
-      // payload contains the routeState (RouterNavigationPayload)
+      // payload contains the `routeState` (RouterNavigationPayload)
       .subscribe((payload) => console.log(state.routeState.urlTokenSegments))
       .unsubscribe()
   }
@@ -161,11 +163,11 @@ Since it's based on `ActivatedRouteSnapshot`, you can also access to their prope
 
 ### Operators
 
-[RxJS](https://angular.io/guide/rx-library) operators for using with effects:
+[RxJS](https://angular.io/guide/rx-library) operators:
 
-- __ofRouterNav__: Operator to filter by router navigation ([NgRx ROUTER_NAVIGATION](https://ngrx.io/guide/router-store/actions)).
-- __ofRouterTokenSegmentsNav__: Operator to filter by router navigation with token segment checks (E.g `page/:token_segment`).
-- __selectRouterNav__: Operator to select current router state navigation.
+- __ofRouterNav__: Operator to filter by router navigation ([NgRx ROUTER_NAVIGATION](https://ngrx.io/guide/router-store/actions)) for using with effects.
+- __ofRouterTokenSegmentsNav__: Operator to filter by router navigation with token segment checks (E.g `page/:token_segment`) for using with effects.
+- __selectRouterNav__: Operator to select current router state navigation (NgRx selector equivalent).
 
 ## Contributions
 
