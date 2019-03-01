@@ -102,8 +102,6 @@ export class PageEffects {
 
 __page.component.ts__
 
-Normally you will only need to subscribe to your individual states dispatched from your effects, but if you need access to Router state data directly you can do it out as follow:
-
 ```ts
 import { Component, OnInit } from '@angular/core'
 
@@ -122,9 +120,9 @@ export class PageComponent {
   // Some custom subscriptions here...
 
   // 1. Router State subscription
-  private route$ = this.store.pipe(select(
+  private router$ = this.store.pipe(select(
     // Selects current Router State feature
-    selectRouterState<MyRootState, MyTokenSegments>()
+    selectRouterNav<MyRootState, MyTokenSegments>()
   ))
 
   constructor (private store: Store<MyRootState>) { }
@@ -132,9 +130,8 @@ export class PageComponent {
   // 2. Displaying current Router State values
   ngOnInit () {
     this.route$
-      // For example, `urlTokenSegments` gives you back all segments previously defined
-      // Since `state` based on `ActivatedRouteSnapshot`, you can also access to their properties as usual
-      .subscribe((state) => console.log(state.urlTokenSegments))
+      // payload contains the routeState (RouterNavigationPayload)
+      .subscribe((payload) => console.log(state.routeState.urlTokenSegments))
       .unsubscribe()
   }
 }
@@ -144,7 +141,7 @@ export class PageComponent {
 
 ### Modules
 
-__RouterStorePlusModule__ is the main module to importing into your app.
+- __RouterStorePlusModule__: The main module to importing into your app.
 
 ### Serializer
 
@@ -168,11 +165,7 @@ Since it's based on `ActivatedRouteSnapshot`, you can also access to their prope
 
 - __ofRouterNav__: Operator to filter by router navigation ([NgRx ROUTER_NAVIGATION](https://ngrx.io/guide/router-store/actions)).
 - __ofRouterTokenSegmentsNav__: Operator to filter by router navigation with token segment checks (E.g `page/:token_segment`).
-
-### Selectors
-
-- __selectRouterState__: Selects current Router state feature.
-
+- __selectRouterNav__: Operator to select current router state navigation.
 
 ## Contributions
 
