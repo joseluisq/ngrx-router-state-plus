@@ -1,5 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core'
-import { RouterStateSerializer } from '@ngrx/router-store'
+import { StoreModule } from '@ngrx/store'
+import { EffectsModule } from '@ngrx/effects'
+import { DEFAULT_ROUTER_FEATURENAME, RouterStateSerializer } from '@ngrx/router-store'
 
 import {
   createConfig,
@@ -7,8 +9,15 @@ import {
   RouterStorePlusOptions,
   STORE_ROUTE_PLUS_CONFIG } from './config'
 import { RouterStateSerializerPlus } from './serializer'
+import { RouterNavigationEffects } from './navigation.effects'
+import { routerNavigationReducer } from './navigation.reducers'
 
-@NgModule({})
+@NgModule({
+  imports: [
+    EffectsModule.forFeature([ RouterNavigationEffects ]),
+    StoreModule.forFeature(DEFAULT_ROUTER_FEATURENAME, routerNavigationReducer)
+  ]
+})
 export class RouterStorePlusModule {
   public static forRoot (
     options: RouterStorePlusOptions = {}

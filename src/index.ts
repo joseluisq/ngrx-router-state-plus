@@ -16,11 +16,18 @@ export {
 } from './serializer'
 
 export {
-  RouterNavigationActionPlus
+  RouterNavigation
 } from './navigation.actions'
 
 export {
-  selectRouterState
-} from './navigation.selectors'
+  RouterNavigationEffects
+} from './navigation.effects'
 
-export * from './router-navigation'
+export {
+  RouterNavigationState,
+  routerNavigationReducer
+} from './navigation.reducers'
+
+export {
+  selectRouterNav
+} from './navigation.selectors'

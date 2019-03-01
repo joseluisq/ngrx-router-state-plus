@@ -1,5 +1,8 @@
-import { RouterNavigationState } from './router-navigation.state'
-import { RouterNavigationActions, RouterNavigationTypes } from './router-navigation.actions'
+import { RouterNavigationActions, RouterNavigationTypes } from './navigation.actions'
+
+export interface RouterNavigationState {
+  [key: string]: any
+}
 
 const routerState = {
   url: '/',

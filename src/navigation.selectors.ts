@@ -1,29 +1,18 @@
+import { Observable } from 'rxjs'
+import { filter } from 'rxjs/operators'
+import { select } from '@ngrx/store'
 import { DEFAULT_ROUTER_FEATURENAME } from '@ngrx/router-store'
 
-import { RouterStatePlusActivatedSnapshot } from './router-state'
-
-interface RouterState<ISegments> {
-  [key: string]: {
-    state: RouterStatePlusActivatedSnapshot<ISegments>
-  }
-}
-
-type RootState<IRootState, ISegments> = IRootState & RouterState<ISegments>
+import { RouterNavPayload } from './router-state'
 
 /**
- * Selects current Router state feature
+ * RxJS operator to select current router state navigation
  *
- * @param featureName Router feature name (DEFAULT_ROUTER_FEATURENAME = 'router' by default)
+ * @returns Observable<RouterNavigationAction<RouterTokenSegments>>
  */
-export const selectRouterState = <IRootState, ISegments = {}>(
-  featureName = DEFAULT_ROUTER_FEATURENAME
-) => (routerState: RootState<IRootState, ISegments>) => {
-  // According to `RouterReducerState` type
-  // https://github.com/ngrx/platform/blob/master/modules/router-store/src/reducer.ts
-  if (routerState.hasOwnProperty(featureName)) {
-    const feature = routerState[featureName]
-    return feature ? feature['state'] : feature
-  } else {
-    throw new Error(`Router state feature '${featureName}' not found.`)
-  }
+export function selectRouterNav <RootState, RouterTokenSegments = {}> () {
+  return (source: Observable<RootState>) => source.pipe(
+    select(DEFAULT_ROUTER_FEATURENAME),
+    filter<RouterNavPayload<RouterTokenSegments>>((state) => (!!state && !!state.routerState))
+  )
 }
