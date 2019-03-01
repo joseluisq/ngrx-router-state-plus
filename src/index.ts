@@ -22,3 +22,5 @@ export {
 export {
   selectRouterState
 } from './navigation.selectors'
+
+export * from './router-navigation'
