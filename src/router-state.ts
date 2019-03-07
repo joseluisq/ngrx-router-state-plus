@@ -1,12 +1,12 @@
 import { Type } from '@angular/core'
-import { ActivatedRouteSnapshot, Data, ParamMap, Params, Route, UrlSegment } from '@angular/router'
+import { Data, Params, UrlSegment } from '@angular/router'
 import { RouterNavigationPayload } from '@ngrx/router-store'
 
 /** RouterStateSegments intersection type (token segments mapping object) */
 export type RouterStateTokenSegments<T> = T & { [key: string]: string }
 
 /**
- * Router activated snapshot state extended of `@angular/router/ActivatedRouteSnapshot`
+ * Router activated snapshot state based on `@angular/router/ActivatedRouteSnapshot`
  *
  * - ActivatedRouteSnapshot: https://angular.io/api/router/ActivatedRouteSnapshot#description
  * - ActivatedRouteSnapshot source: https://github.com/angular/angular/blob/master/packages/router/src/router_state.ts
@@ -30,23 +30,9 @@ export interface RouterStatePlusActivatedSnapshot<RouterTokenSegments> {
   outlet: string
   /** The component of the route */
   component: Type<any> | string | null
-  /** The configuration used to match this route */
-  readonly routeConfig: Route | null
-  /** The root of the router state */
-  readonly root: ActivatedRouteSnapshot
-  /** The parent of this route in the router state tree */
-  readonly parent: ActivatedRouteSnapshot | null
-  /** The first child of this route in the router state tree */
-  readonly firstChild: ActivatedRouteSnapshot | null
-  /** The children of this route in the router state tree */
-  readonly children: ActivatedRouteSnapshot[]
-  /** The path from the root of the router state tree to this route */
-  readonly pathFromRoot: ActivatedRouteSnapshot[]
-  readonly paramMap: ParamMap
-  readonly queryParamMap: ParamMap
-  toString (): string
 }
 
+/** The router navigation payload extended of NgRx RouterNavigationPayload */
 export interface RouterNavPayload<RouterTokenSegments = {}>
   extends RouterNavigationPayload<RouterStatePlusActivatedSnapshot<RouterTokenSegments>> {
 }

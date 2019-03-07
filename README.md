@@ -161,6 +161,8 @@ But there are only three differences at properties level:
 
 Since it's based on `ActivatedRouteSnapshot`, you can also access to their properties as usual with the exception that `url` was moved to `urlSegments` and `url` is now current string url.
 
+More details about available properties at [router-state.ts](./src/router-state.ts) file.
+
 ### Operators
 
 [RxJS](https://angular.io/guide/rx-library) operators:

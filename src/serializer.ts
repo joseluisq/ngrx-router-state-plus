@@ -34,7 +34,7 @@ export class RouterStateSerializerPlus<RouterTokenSegments> implements
   ): RouterStatePlusActivatedSnapshot<RouterTokenSegments> {
     let route = routerState.root
 
-    if (route.firstChild) {
+    while (route.firstChild) {
       route = route.firstChild
     }
 
@@ -49,15 +49,7 @@ export class RouterStateSerializerPlus<RouterTokenSegments> implements
       fragment: route.fragment,
       data: route.data,
       outlet: route.outlet,
-      component: route.component,
-      routeConfig: route.routeConfig,
-      root: route.root,
-      parent: route.parent,
-      firstChild: route.firstChild,
-      children: route.children,
-      pathFromRoot: route.pathFromRoot,
-      paramMap: route.paramMap,
-      queryParamMap: route.queryParamMap
+      component: route.component
     }
   }
 
