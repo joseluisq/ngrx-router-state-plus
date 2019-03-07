@@ -5,7 +5,7 @@
 ## Features
 
 - [Router state serialization](https://ngrx.io/guide/router-store/configuration#custom-router-state-serializer) out of the box.
-- Route state payload that extend all [ActivatedRouteSnapshot](https://angular.io/api/router/ActivatedRouteSnapshot#description) properties.
+- Route state payload based on [ActivatedRouteSnapshot](https://angular.io/api/router/ActivatedRouteSnapshot#description) properties.
 - RxJS operators for using with effects:
   - `ofRouterNav()` operator to filter by router navigation ([NgRx ROUTER_NAVIGATION](https://ngrx.io/guide/router-store/actions)).
   - `ofRouterTokenSegmentsNav()` operator to filter by router token segment (E.g `page/:token_segment`).
@@ -151,7 +151,7 @@ export class PageComponent {
 
 ### Router State Plus
 
-[`RouterStatePlusActivatedSnapshot<RouterTokenSegments>`](./src/router-state.ts) is router activated state interface that extend of [Angular ActivatedRouteSnapshot](https://angular.io/api/router/ActivatedRouteSnapshot#description).
+[`RouterStatePlusActivatedSnapshot<RouterTokenSegments>`](./src/router-state.ts) is router activated state interface based on [Angular ActivatedRouteSnapshot](https://angular.io/api/router/ActivatedRouteSnapshot#description).
 
 But there are only three differences at properties level:
 
@@ -161,7 +161,7 @@ But there are only three differences at properties level:
 
 Since it's based on `ActivatedRouteSnapshot`, you can also access to their properties as usual with the exception that `url` was moved to `urlSegments` and `url` is now current string url.
 
-More details about available properties at [router-state.ts](./src/router-state.ts) file.
+__Note:__ More details about available properties at [router-state.ts](./src/router-state.ts) file.
 
 ### Operators
 
