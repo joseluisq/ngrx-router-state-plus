@@ -59,7 +59,7 @@
     "tsickle": "0.35.0",
     "tslint": "5.12.1",
     "tslint-config-standard-plus": "2.1.4",
-    "typescript": "3.2.2",
+    "typescript": "3.4.5",
     "zone.js": "0.9.1"
   }
 }
