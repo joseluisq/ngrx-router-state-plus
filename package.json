@@ -53,7 +53,7 @@
     "git-testing-hook": "0.3.0",
     "jasmine": "3.4.0",
     "jasmine-spec-reporter": "4.2.1",
-    "ng-packagr": "4.6.0",
+    "ng-packagr": "5.2.0",
     "rxjs": "6.5.2",
     "ts-node": "8.1.0",
     "tsickle": "0.35.0",
