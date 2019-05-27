@@ -55,7 +55,7 @@
     "jasmine-spec-reporter": "4.2.1",
     "ng-packagr": "4.6.0",
     "rxjs": "6.5.2",
-    "ts-node": "8.1.0",
+    "ts-node": "8.2.0",
     "tsickle": "0.35.0",
     "tslint": "5.16.0",
     "tslint-config-standard-plus": "2.1.4",
