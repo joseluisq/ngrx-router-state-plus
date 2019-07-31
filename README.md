@@ -1,3 +1,7 @@
+**DEPRECATION NOTICE:** This repository was moved https://git.joseluisq.net/joseluisq/ngrx-router-state-plus
+
+---
+
 # ngrx-router-state-plus [![npm](https://img.shields.io/npm/v/ngrx-router-state-plus.svg)](https://www.npmjs.com/package/ngrx-router-state-plus) [![npm](https://img.shields.io/npm/dt/ngrx-router-state-plus.svg)](https://www.npmjs.com/package/ngrx-router-state-plus) [![Build Status](https://travis-ci.org/joseluisq/ngrx-router-state-plus.svg?branch=master)](https://travis-ci.org/joseluisq/ngrx-router-state-plus) [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
 > [@ngrx/router-store](https://github.com/ngrx/platform/tree/master/modules/router-store) extension that provides [router state serialization](https://ngrx.io/guide/router-store/configuration#custom-router-state-serializer) with [a common payload-composed state](./src/router-state.ts) data.
